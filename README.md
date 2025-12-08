@@ -17,3 +17,19 @@ An experimental lab for analyzing Formula 1 race strategy using Python, FastF1, 
 ## Status
 
 Week 1: 🔄 Setting up environment and collecting baseline data.
+
+## Environment
+
+You can install the basic dependencies with:
+
+```bash
+pip install -r requirements.txt 
+
+### Full Dataset Storage
+
+Because F1 timing data and FastF1 cache files can be very large,
+the complete dataset (all seasons 2021–2024) is stored externally
+in Google Drive during development.
+
+This repository includes only a small set of example CSV files in `data/`
+to make the notebooks runnable and keep the project lightweight.

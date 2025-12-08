@@ -1,0 +1,67 @@
+import os
+from typing import Iterable, Tuple
+
+import fastf1
+from fastf1.req import RateLimitExceededError
+
+
+def slugify_event_name(name: str) -> str:
+    """Turn 'Bahrain Grand Prix' → 'bahrain_grand_prix'."""
+    return (
+        name.lower()
+        .replace(" ", "_")
+        .replace("-", "_")
+        .replace("'", "")
+    )
+
+
+def download_selected_races(
+    races: Iterable[Tuple[int, str, str]],
+    data_base_path: str = "data",
+    cache_path: str = "fastf1_cache",
+) -> None:
+    """
+    Download laps data for a list of (year, event_name, session_code) tuples.
+
+    Example race tuple: (2024, "Bahrain", "R")
+    """
+    os.makedirs(cache_path, exist_ok=True)
+    fastf1.Cache.enable_cache(cache_path)
+
+    for year, event_name, session_code in races:
+        print(f"\n[LOAD] {year} {event_name} – {session_code}")
+
+        safe_event = slugify_event_name(event_name)
+        event_folder = os.path.join(data_base_path, str(year), safe_event)
+        os.makedirs(event_folder, exist_ok=True)
+
+        out_file = os.path.join(event_folder, f"laps_{year}_{safe_event}.csv")
+        if os.path.exists(out_file):
+            print(f"[SKIP] {year} {event_name} (already exists)")
+            continue
+
+        try:
+            session = fastf1.get_session(year, event_name, session_code)
+            session.load()
+
+            laps = session.laps
+            laps.to_csv(out_file, index=False)
+
+            print(f"[OK] Saved laps → {out_file}")
+        except RateLimitExceededError as e:
+            print("⚠️ Hit FastF1 API rate limit; stopping.")
+            print("Details:", e)
+            break
+        except Exception as e:
+            print(f"[ERROR] {year} {event_name}: {e}")
+
+
+if __name__ == "__main__":
+    # Example: a small curated set of races
+    races_to_download = [
+        (2021, "Bahrain", "R"),
+        (2022, "Bahrain", "R"),
+        (2023, "Bahrain", "R"),
+        (2024, "Bahrain", "R"),
+    ]
+    download_selected_races(races_to_download)

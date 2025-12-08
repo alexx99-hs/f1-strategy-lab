@@ -21,9 +21,10 @@ cache/
 *.log
 
 # Data files (keep only processed if you want later)
-data/*.csv
 data/*.parquet
 data/*.pkl
+fastf1_cache/
+
 
 # OS
 .DS_Store
