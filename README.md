@@ -17,6 +17,7 @@ An experimental lab for analyzing Formula 1 race strategy using Python, FastF1, 
 ## Status
 
 Week 1: 🔄 Setting up environment and collecting baseline data.
+Week 2: 🏎️Exploratory Tire Degradation Analysis.
 
 ## Environment
 
