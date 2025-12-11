@@ -35,8 +35,7 @@ This repository includes only a small set of example CSV files in `data/`
 to make the notebooks runnable and keep the project lightweight.
 
 ---
-
-## 🏎️ Week 2 — Exploratory Tire Degradation Analysis
+🏎️ Week 2 — Exploratory Tire Degradation Analysis
 
 This week focuses on understanding how lap time evolves as tires age during a race.  
 Using data from the 2024 Bahrain Grand Prix, I explored driver pace, tire compound behavior, and team-level degradation differences.
