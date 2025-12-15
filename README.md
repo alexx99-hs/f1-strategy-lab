@@ -18,7 +18,7 @@ An experimental lab for analyzing Formula 1 race strategy using Python, FastF1, 
 
 Week 1: 🔄 Setting up environment and collecting baseline data.
 Week 2: 🏎️Exploratory Tire Degradation Analysis.
-
+Week 3: Tire Life Prediction (ML Project #1)
 ## Environment
 
 You can install the basic dependencies with:
@@ -81,4 +81,59 @@ Contains all analysis steps, visualizations, and strategic interpretation.
 - Visualization for race strategy understanding  
 
 ---
+---
+
+## 🤖 Week 3 — Tire Life Prediction (ML Project #1)
+
+This week turns tire degradation into a supervised ML problem.
+
+### 🎯 Problem
+
+Given information about a lap (tire age, stint, race phase), predict the
+expected lap time. The goal is to:
+
+- Quantify how strongly lap time depends on tire age
+- Compare predictability of different cars (Ferrari vs Red Bull)
+- Build models that could be used in pit-window and stint-length decisions
+
+### 📘 Notebook
+
+**`notebooks/03_tire_life_prediction.ipynb`**
+
+Contains:
+
+1. Data preparation (reusing the cleaned laps from Week 2)
+2. **Model 1 — Linear Regression**
+   - Baseline relationship: `LapTimeSeconds ~ TyreLife`
+   - Interpretable degradation slope (seconds per lap of tire age)
+3. **Model 2 — Random Forest Regression**
+   - Non-linear degradation modeling
+   - Captures more complex patterns (fuel burn, local fluctuations)
+   - Better performance on stable cars (e.g. VER on HARD)
+
+### 📂 Saved Models (`/models`)
+
+Example artifacts:
+
+- `linreg_2024_bahrain_VER_HARD.pkl`
+- `linreg_2024_bahrain_LEC_HARD.pkl`
+- `rf_2024_bahrain_VER_HARD.pkl`
+- `rf_2024_bahrain_LEC_HARD.pkl`
+
+These can be loaded with `joblib` for future simulation notebooks
+(e.g. strategy optimization or pit-window prediction).
+
+### 🧠 Key Insights
+
+- Red Bull (VER) exhibits predictable, low-noise degradation:
+  - Both Linear Regression and Random Forest achieve low MAE
+  - R² is positive, indicating that tire age explains a meaningful part of lap time variance
+
+- Ferrari (LEC) shows noisier, less predictable tire behavior:
+  - Higher MAE, negative R² for both models
+  - Degradation is less linear and more influenced by setup/thermal swings
+
+This difference in **predictability** is itself a strategic factor:
+teams with stable long-run performance can be modeled more accurately and
+therefore run more reliable strategy simulations.
 
