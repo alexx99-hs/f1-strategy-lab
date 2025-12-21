@@ -137,3 +137,11 @@ This difference in **predictability** is itself a strategic factor:
 teams with stable long-run performance can be modeled more accurately and
 therefore run more reliable strategy simulations.
 
+### Modeling Constraints
+
+To ensure physical realism, tire degradation slopes are constrained to be
+non-negative. This prevents the optimizer from exploiting statistical noise
+(e.g., lap time improvements on older tires due to track evolution or fuel burn-off).
+
+This constraint stabilizes strategy optimization and reflects real-world
+Formula 1 tire behavior.
