@@ -10,15 +10,19 @@ An experimental lab for analyzing Formula 1 race strategy using Python, FastF1, 
 
 ## Structure
 
-- `data/` – cached and exported race data (laps, telemetry, etc.)
-- `notebooks/` – exploratory Jupyter notebooks (starting with `01_data_download.ipynb`)
-- `src/` – helper scripts for data loading and analysis (to be added later)
+Structure
+data/ – cached and exported race data (laps, telemetry, etc.)
+figures/ – generated plots and strategy visualizations
+models/ – trained ML models (Linear Regression, Random Forest)
+notebooks/ – step-by-step analysis and simulation notebooks
+src/ – reusable strategy and data-processing modules
 
 ## Status
 
 Week 1: 🔄 Setting up environment and collecting baseline data.
 Week 2: 🏎️Exploratory Tire Degradation Analysis.
 Week 3: Tire Life Prediction (ML Project #1)
+Week 4: Pit Strategy Optimizer
 ## Environment
 
 You can install the basic dependencies with:
@@ -145,3 +149,81 @@ non-negative. This prevents the optimizer from exploiting statistical noise
 
 This constraint stabilizes strategy optimization and reflects real-world
 Formula 1 tire behavior.
+
+🧠 Week 4 — Pit Strategy Optimizer (Project #3)
+
+This project integrates tire degradation models into a full race simulation and pit strategy optimizer, resembling simplified tools used by real Formula 1 strategy teams.
+
+🎯 Objective
+
+Given:
+
+tire degradation models
+
+pit stop time loss
+
+race distance
+
+determine:
+
+when to pit
+
+which tire compound to switch to
+
+which strategy minimizes total race time
+
+📘 Notebook
+
+notebooks/04_strategy_optimizer.ipynb
+
+⚙️ Approach
+
+Tire Degradation Modeling
+
+Linear degradation models per compound (seconds per lap of tire age)
+
+Physical constraint enforced: degradation slope ≥ 0
+
+Race Simulation Engine
+
+Lap-by-lap race simulation
+
+Explicit pit stop time loss
+
+Tire age reset after pit stops
+
+Strategy Optimization
+
+Brute-force evaluation of one-stop strategies
+
+Search over:
+
+pit lap (realistic window)
+
+starting compound
+
+second compound
+
+Objective: minimize total race time
+
+📊 Key Results (Bahrain 2024, VER)
+
+Optimal strategies converge around lap 25–32
+
+Multiple strategies (SOFT → HARD, HARD → SOFT) produce nearly identical race time
+
+Indicates a robust strategy window, not a fragile single optimum
+
+This behavior closely matches real F1 strategy decision-making, where teams often choose between several near-equivalent options based on race context.
+
+📈 Visual Outputs (figures/)
+
+simulated_race_lap_times_VER_2024_bahrain.png
+Lap-by-lap race simulation showing degradation and pit reset
+
+optimal_pit_strategy_VER_2024_bahrain.png
+Visualization of the best-performing one-stop strategy
+
+🧠 Strategic Insight
+
+Rather than identifying a single “perfect” strategy, the optimizer reveals regions of strategic equivalence, a key concept in real-world Formula 1 race strategy.
