@@ -227,3 +227,13 @@ Visualization of the best-performing one-stop strategy
 🧠 Strategic Insight
 
 Rather than identifying a single “perfect” strategy, the optimizer reveals regions of strategic equivalence, a key concept in real-world Formula 1 race strategy.
+
+### 
+
+Simulates early and late pit stop scenarios to quantify undercut and overcut
+effectiveness under varying tyre degradation conditions.
+
+Includes:
+- Baseline vs offset pit strategy comparison
+- Lap-by-lap advantage visualization
+- Heatmap of optimal pit timing across degradation regimes
