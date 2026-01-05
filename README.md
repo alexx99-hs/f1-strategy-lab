@@ -237,3 +237,13 @@ Includes:
 - Baseline vs offset pit strategy comparison
 - Lap-by-lap advantage visualization
 - Heatmap of optimal pit timing across degradation regimes
+
+### Project 5 — Traffic & Dirty Air Impact Model
+
+Extends pit stop strategy simulations by modeling post-pit traffic and
+dirty air effects.
+
+Key features:
+- Quantifies when undercuts fail due to traffic
+- Break-even analysis based on time spent in traffic
+- Risk-aware expected value modeling using traffic probability
